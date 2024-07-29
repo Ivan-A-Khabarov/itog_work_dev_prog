@@ -1,0 +1,17 @@
+    1  clear
+    2  echo -e "Cобаки\nКошки\nХомяки" > Домашние_животные.txt
+    3  echo -e "Лошади\nВерблюды\nОслы" > Вьючные_животные.txt
+    4  cat Домашние_животные.txt Вьючные_животные.txt > Животные.txt
+    5  cat Животные.txt 
+    6  mv Животные.txt Друзья_Человека.txt
+    7  mkdir Все_Животные && mv Друзья_Человека.txt Все_Животные/
+    8  wget https://dev.mysql.com/get/mysql-apt-config_0.8.32-1_all.deb
+    9  sudo dpkg -i mysql-apt-config_0.8.32-1_all.deb
+   10  sudo apt update
+   11  sudo apt install mysql-server
+   12  sudo apt download google-chrome-stable_current_amd64.deb
+   13  sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb.
+   14  sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+   15  sudo dpkg -i google-chrome-stable_current_amd64.deb 
+   16  sudo dpkg -r google-chrome-stable 
+   17  history > история_комманд.txt
