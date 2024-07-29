@@ -1,0 +1,124 @@
+mysql> CREATE DATABASE Human_Friends;
+Query OK, 1 row affected (0,00 sec)
+
+mysql> USE Human_Friends;
+Database changed
+mysql> CREATE TABLE Domestic_Animals (
+    ->     id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     type VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0,01 sec)
+
+mysql> CREATE TABLE Pack_Animals (
+    ->     id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     type VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0,00 sec)
+
+mysql> CREATE TABLE Dogs (
+    ->     id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     name VARCHAR(50),
+    ->     commands TEXT,
+    ->     birth_date DATE
+    -> );
+Query OK, 0 rows affected (0,01 sec)
+
+mysql> CREATE TABLE Cats (
+    ->     id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     name VARCHAR(50),
+    ->     commands TEXT,
+    ->     birth_date DATE
+    -> );
+Query OK, 0 rows affected (0,00 sec)
+
+mysql> CREATE TABLE Hamsters (
+    ->     id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     name VARCHAR(50),
+    ->     commands TEXT,
+    ->     birth_date DATE
+    -> );
+Query OK, 0 rows affected (0,00 sec)
+
+mysql> CREATE TABLE Horses (
+    ->     id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     name VARCHAR(50),
+    ->     commands TEXT,
+    ->     birth_date DATE
+    -> );
+Query OK, 0 rows affected (0,01 sec)
+
+mysql> CREATE TABLE Camels (
+    ->     id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     name VARCHAR(50),
+    ->     commands TEXT,
+    ->     birth_date DATE
+    -> );
+Query OK, 0 rows affected (0,01 sec)
+
+mysql> CREATE TABLE Donkeys (
+    ->     id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     name VARCHAR(50),
+    ->     commands TEXT,
+    ->     birth_date DATE
+    -> );
+Query OK, 0 rows affected (0,01 sec)
+
+mysql> INSERT INTO Dogs (name, commands, birth_date) VALUES ('Шарик', 'сидеть, лежать, голос', '2020-01-01');
+Query OK, 1 row affected (0,02 sec)
+
+mysql> INSERT INTO Cats (name, commands, birth_date) VALUES ('Мурка', 'спать, есть', '2021-02-02');
+Query OK, 1 row affected (0,00 sec)
+
+mysql> INSERT INTO Hamsters (name, commands, birth_date) VALUES ('Хома', 'бежать, прыгать', '2022-03-03');
+Query OK, 1 row affected (0,00 sec)
+
+mysql> INSERT INTO Horses (name, commands, birth_date) VALUES ('Платон', 'галоп, стоп', '2019-04-04');
+Query OK, 1 row affected (0,00 sec)
+
+mysql> INSERT INTO Camels (name, commands, birth_date) VALUES ('Гена', 'стоять, идти', '2018-05-05');
+Query OK, 1 row affected (0,00 sec)
+
+mysql> INSERT INTO Donkeys (name, commands, birth_date) VALUES ('Иа', 'идти, стоять', '2017-06-06');
+Query OK, 1 row affected (0,00 sec)
+
+mysql> DELETE FROM Camels;
+Query OK, 1 row affected (0,00 sec)
+
+mysql> CREATE TABLE Horses_and_Donkeys AS
+    -> SELECT * FROM Horses
+    -> UNION
+    -> SELECT * FROM Donkeys;
+Query OK, 2 rows affected (0,01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE Young_Animals AS 
+    -> SELECT *, TIMESTAMPDIFF(MONTH,birth_date,CURDATE()) AS age_in_months
+    -> FROM (
+    -> SELECT * FROM Dogs WHERE birth_date BETWEEN DATE_SUB(CURDATE(),INTERVAL 3 YEAR) AND DATE_SUB(CURDATE(),INTERVAL 1 YEAR)
+    -> UNION
+    ->     SELECT * FROM Cats WHERE birth_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 3 YEAR) AND DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
+    ->     UNION
+    ->     SELECT * FROM Hamsters WHERE birth_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 3 YEAR) AND DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
+    ->     UNION
+    ->     SELECT * FROM Horses WHERE birth_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 3 YEAR) AND DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
+    ->     UNION
+    ->     SELECT * FROM Donkeys WHERE birth_date BETWEEN DATE_SUB(CURDATE(), INTERVAL 3 YEAR) AND DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
+    -> ) AS young_animals;
+Query OK, 1 row affected (0,01 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE All_Animals AS
+    -> SELECT *, 'Dogs' AS animal_type FROM Dogs
+    -> UNION
+    -> SELECT *, 'Cats' AS animal_type FROM Cats
+    -> UNION
+    -> SELECT *, 'Hamsters' AS animal_type FROM Hamsters
+    -> UNION
+    -> SELECT *, 'Horses' AS animal_type FROM Horses
+    -> UNION
+    -> SELECT *, 'Donkeys' AS animal_type FROM Donkeys;
+Query OK, 5 rows affected (0,01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> 
+
